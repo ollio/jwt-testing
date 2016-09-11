@@ -1,0 +1,47 @@
+group 'de.ollio'
+
+buildscript {
+  repositories {
+    mavenLocal()
+    jcenter()
+  }
+  dependencies {
+    classpath 'org.codehaus.groovy:groovy-all:2.4.5'
+  }
+}
+
+repositories {
+  mavenLocal()
+  jcenter()
+}
+
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+sourceSets {
+  main {
+    java { srcDirs = [] }
+    groovy { srcDirs = ["src/main/java", "src/main/groovy"] }
+  }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+  compile 'io.jsonwebtoken:jjwt:0.6.0'
+  compile 'org.bitbucket.b_c:jose4j:0.5.2'
+  compile 'commons-io:commons-io:2.4'
+  compile group: 'org.bouncycastle', name: 'bcprov-jdk16', version: '1.46'
+
+  testCompile 'org.testng:testng:6.8.8'
+  testCompile 'org.easytesting:fest-assert:1.4'
+}
+
+test {
+  useTestNG()
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.10'
+}
